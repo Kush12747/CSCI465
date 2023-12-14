@@ -1,0 +1,153 @@
+
+                   J E S 2  J O B  L O G  --  S Y S T E M  8 5 6 1  --  N O D E  S V S C J E S 2        
+
+ 
+09.27.33 JOB00011 ---- THURSDAY,  14 SEP 2023 ----
+09.27.33 JOB00011  IRR010I  USERID KC03C53  IS ASSIGNED TO THIS JOB.
+09.27.34 JOB00011  ICH70001I KC03C53  LAST ACCESS AT 09:25:54 ON THURSDAY, SEPTEMBER 14, 2023
+09.27.34 JOB00011  $HASP373 KC03C53A STARTED - INIT 1    - CLASS A        - SYS 8561
+09.27.34 JOB00011  -                                      -----TIMINGS (MINS.)------                          -----PAGING COUNTS----
+09.27.34 JOB00011  -STEPNAME PROCSTEP    RC   EXCP   CONN       TCB       SRB  CLOCK          SERV  WORKLOAD  PAGE  SWAP   VIO SWAPS
+09.27.34 JOB00011  -JSTEP01              00     39      1       .00       .00     .0             3  BATCH        0     0     0     0
+09.27.34 JOB00011  -JSTEP02              00     40      3       .00       .00     .0             3  BATCH        0     0     0     0
+09.27.34 JOB00011  -KC03C53A ENDED.  NAME-K.GANDHI             TOTAL TCB CPU TIME=      .00 TOTAL ELAPSED TIME=    .0
+09.27.34 JOB00011  $HASP395 KC03C53A ENDED - RC=0000
+
+------ JES2 JOB STATISTICS ------
+
+
+  14 SEP 2023 JOB EXECUTION DATE
+
+
+           54 CARDS READ
+
+
+          132 SYSOUT PRINT RECORDS
+
+
+            0 SYSOUT PUNCH RECORDS
+
+
+           13 SYSOUT SPOOL KBYTES
+
+
+         0.01 MINUTES EXECUTION TIME
+       1 //KC03C53A JOB ,'K.GANDHI',MSGCLASS=H                                   JOB00011
+         //*                                                                             
+         //*****************************************************************             
+         //*                                                               *             
+         //*  CSCI 465               ASSIGNMENT 2           FALL 2023      *             
+         //*                                                               *             
+         //*  DEVELOPER NAME: KUSH GANDHI                                  *             
+         //*        DUE DATE: 9/15/23                                      *             
+         //*                                                               *             
+         //*  FUNCTION: THIS PROGRAM PROCESS A FETCHING TECHNIQUE FROM A   *             
+         //*            EXISTING LOAD LIBRARY.                             *             
+         //*                                                               *             
+         //*  OUTPUT: PRINTS THE PREAMBLE OF THE U.S CONSITUTION           *             
+         //*****************************************************************             
+         //*                                                                             
+         //*****************************************************************             
+         //*                                                               *             
+         //* JSTEP01 - THE FIRST STEPS WILL FETCH AND EXECUTES A PROGRAM   *             
+         //*            A PROGRAM.                                         *             
+         //*****************************************************************             
+       2 //JSTEP01 EXEC PGM=READRECS     PROGRAM NAME IN LOAD LIBRARY                    
+         //*                                                                             
+         //* DD STMT. SPECIFYING THE LOAD LIBRARY AND SET TO SHARED                      
+       3 //STEPLIB DD DSN=KC02322.CSCI465.LOADLIB,DISP=SHR                               
+         //*                                                                             
+         //* DD STMT. SPECIFIES THE INPUT DATASET                                        
+       4 //RECSIN  DD DSN=KC02322.CSCI465.DATAFA23(DATA2),DISP=SHR                       
+         //*                                                                             
+         //* FORMAT FOR SPACE                                                            
+       5 //RECSOUT DD DSN=&&TEMP,                                                        
+         //           DCB=(LRECL=80,BLKSIZE=880,RECFM=FB),                               
+         //           SPACE=(TRK,(1,1)),                                                 
+         //           DISP=(NEW,PASS,DELETE)                                             
+         //*                                                                             
+       6 //SYSDUMP DD SYSOUT=*   USED TO CHECK ABENDS                                    
+         //*                                                                             
+         //***************************************************************               
+         //*                                                             *               
+         //* JSTEP02 -  THIS STEP WILL FETCH AND EXECUTE FROM SAME LOAD  *               
+         //*            LIBRARY.                                         *               
+         //***************************************************************               
+         //*                                                                             
+       7 //JSTEP02 EXEC PGM=WRTERECS,COND=(0,LT) PROGRAM NAME IN LOAD LIBRARY            
+         //*                                                                             
+         //* DD STMT. SPECIFYING THE LOAD LIBRARY AND SET TO SHARED                      
+       8 //STEPLIB DD DSN=KC02322.CSCI465.LOADLIB,DISP=SHR                               
+         //*                                                                             
+         //* STORES IN A TEMPORARY DATASET CALLED TEMP                                   
+       9 //RECSIN  DD DSN=&&TEMP,DISP=(MOD,DELETE,DELETE)                                
+         //*                                                                             
+      10 //RECSOUT DD SYSOUT=*   PRINTS OUTPUT                                           
+         //*                                                                             
+      11 //SYSDUMP DD SYSOUT=*   USED TO CHECK ABENDS                                    
+      12 //                                                                              
+ICH70001I KC03C53  LAST ACCESS AT 09:25:54 ON THURSDAY, SEPTEMBER 14, 2023
+IEFA111I KC03C53A IS USING THE FOLLOWING JOB RELATED SETTINGS:
+         SWA=ABOVE,TIOT SIZE=32K,DSENQSHR=DISALLOW,GDGBIAS=JOB
+IEF236I ALLOC. FOR KC03C53A JSTEP01
+IGD103I SMS ALLOCATED TO DDNAME STEPLIB
+IGD103I SMS ALLOCATED TO DDNAME RECSIN
+IGD101I SMS ALLOCATED TO DDNAME (RECSOUT )
+        DSN (SYS23257.T092733.RA000.KC03C53A.TEMP.H01    )
+        STORCLAS (TEMPSC) MGMTCLAS (        ) DATACLAS (        )
+        VOL SER NOS= KCTR01                                                                
+IEF237I JES2 ALLOCATED TO SYSDUMP
+IEF142I KC03C53A JSTEP01 - STEP WAS EXECUTED - COND CODE 0000
+IGD104I KC02322.CSCI465.LOADLIB                      RETAINED,  DDNAME=STEPLIB 
+IGD104I KC02322.CSCI465.DATAFA23                     RETAINED,  DDNAME=RECSIN  
+IGD106I SYS23257.T092733.RA000.KC03C53A.TEMP.H01     PASSED,    DDNAME=RECSOUT 
+IEF285I   KC03C53.KC03C53A.JOB00011.D0000101.?         SYSOUT        
+IEF373I STEP/JSTEP01 /START 2023257.0927
+IEF032I STEP/JSTEP01 /STOP  2023257.0927 
+        CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+        VIRT:    88K  SYS:   264K  EXT:     3168K  SYS:    11228K
+        ATB- REAL:                  1256K  SLOTS:                     0K
+             VIRT- ALLOC:      14M SHRD:       0M
+IEFA108I KC03C53A JSTEP02 RECSIN - PASSED DATA SET INFORMATION FOUND. MOD IS TREATED AS OLD
+IEF236I ALLOC. FOR KC03C53A JSTEP02
+IGD103I SMS ALLOCATED TO DDNAME STEPLIB
+IGD103I SMS ALLOCATED TO DDNAME RECSIN
+IEF237I JES2 ALLOCATED TO RECSOUT
+IEF237I JES2 ALLOCATED TO SYSDUMP
+IEF142I KC03C53A JSTEP02 - STEP WAS EXECUTED - COND CODE 0000
+IGD104I KC02322.CSCI465.LOADLIB                      RETAINED,  DDNAME=STEPLIB 
+IGD105I SYS23257.T092733.RA000.KC03C53A.TEMP.H01     DELETED,   DDNAME=RECSIN  
+IEF285I   KC03C53.KC03C53A.JOB00011.D0000102.?         SYSOUT        
+IEF285I   KC03C53.KC03C53A.JOB00011.D0000103.?         SYSOUT        
+IEF373I STEP/JSTEP02 /START 2023257.0927
+IEF032I STEP/JSTEP02 /STOP  2023257.0927 
+        CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+        VIRT:    92K  SYS:   264K  EXT:     3164K  SYS:    11232K
+        ATB- REAL:                  1256K  SLOTS:                     0K
+             VIRT- ALLOC:      14M SHRD:       0M
+IEF375I  JOB/KC03C53A/START 2023257.0927
+IEF033I  JOB/KC03C53A/STOP  2023257.0927 
+        CPU:     0 HR  00 MIN  00.00 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+
+QUOTATIONS FROM TWO IMPORTANT AMERICAN HISTORICAL DOCUMENTS                                                                         
+
+"We hold these truths to be self-evident, that all men are created                                                                  
+
+equal, that they are endowed by their Creator with certain unalienable                                                              
+
+Rights, that among these are Life, Liberty and the pursuit of                                                                       
+
+Happiness." -- Declaration of Independence, 1776                                                                                    
+
+"We the People of the United States, in Order to form a more perfect                                                                
+
+Union, establish Justice, insure domestic Tranquility, provide for the                                                              
+
+common defence, promote the general Welfare, and secure the Blessings                                                               
+
+of Liberty to ourselves and our Posterity, do ordain and establish this                                                             
+
+Constitution of the United States of America." -- Preamble to the U.S.                                                              
+
+Constitution, 1789                                                                                                                  
+
